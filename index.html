@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة ذكور صويلح الإعدادية</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: rgba(0, 95, 115, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .top-right-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 100px; /* يمكنك ضبط حجم الصورة حسب الحاجة */
+            height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+            z-index: 1; /* تأكد من أن الصورة تظهر فوق العناصر الأخرى */
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: not-allowed;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        button:enabled {
+            cursor: pointer;
+            background-color: #000000;
+        }
+
+        .terms-container {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .terms-label {
+            margin-left: 10px;
+            color: blue;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: #f9f9f9;
+            color: #005f73;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .terms-link {
+            color: blue;
+            text-decoration: none;
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 0.9rem;
+        }
+
+        .terms-link:hover {
+            text-decoration: underline;
+        }
+        .top-left-text {
+
+            position: absolute; 
+            bottom: 25px;
+            left: 10px; /* المسافة من اليسار */
+            font-size: 16px; /* حجم الخط */
+            color: #333; /* لون النص */
+            background-color: rgba(0, 95, 115, 0.8); /* خلفية نصية مع شفافية */
+            padding: 5px; /* مسافة داخلية حول النص */
+            border-radius: 5px; /* حواف دائرية للنص */
+        }
+
+    </style>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+            const borrowButton = document.getElementById('borrowButton');
+            const termsCheckbox = document.getElementById('termsCheckbox');
+
+            termsCheckbox.addEventListener('change', function () {
+                borrowButton.disabled = !termsCheckbox.checked;
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>مكتبة ذكور صويلح الإعدادية</h1>
+    </header>
+    <img src="logo.png" alt="وصف الصورة" class="top-right-image">
+    <main>
+        <h2>استعارة الكتب</h2>
+        <div class="button-container">
+            <button id="borrowButton" disabled cl class="take-book" onclick="location.href='finish.html'">استعارة</button>
+            <div class="terms-container">
+                <input type="checkbox" id="termsCheckbox">
+                <label for="termsCheckbox" class="terms-label">الموافقة على الشروط والأحكام</label>
+            <div class="top-left-text">
+                make by : Jehad Ahmad Al-Hajj
+            </div>
+
+        </div>
+    </main>
+    <footer>
+        <a href="xt.html" class="terms-link">الشروط والأحكام</a>
+    </footer>
+</body>
+</html>

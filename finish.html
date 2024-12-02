@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصنيف الكتب</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: right;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            color: #005f73;
+            font-size: 24px;
+            border-bottom: 2px solid #005f73;
+            padding-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            border-color: #005f73;
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #005f73;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+            opacity: 0.6;
+        }
+        
+        .submit-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .submit-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+          emailjs.init("kM-CYTfcaFTdIjwU0");
+        })();
+    </script>
+    <script>
+        function updateBookList(category) {
+            var bookList = {
+                "قصص مصورة": ["-- اختر الكتاب --",
+                    "ملك يفتخر بشعبه", 
+                    "طائرة تمطر حبا", 
+                    "السمكات الثلاث", 
+                    "النباتات", 
+                    "الفنان", 
+                    "البطريق النجار", 
+                    "الثلاثي المدهش", 
+                    "أنا احب الكتابة", 
+                    "قصص الأنبياء"
+                ],
+                "ديانات": ["-- اختر الكتاب --",
+                    "أمهات المؤمنين ", 
+                    "الاعلام بالحروب", 
+                    "السيرة النبوية العطرة", 
+                    "الوصول الى قواعد الأصول", 
+                    "التحفة السنية",   "محبة النبي وتعظيمه", 
+                    "رياض الصالحين ","الجامع من المقدمات ",
+                    "تهافت التهافت ",
+                    "تقويم المسيرة الإسلامية", 
+                    "تعليم الصلاة", ""
+                ],
+                "علوم اجتماعية": ["-- اختر الكتاب --",
+                    "أفكار", 
+                    "التعليم والتعلم الصفي", 
+                    "طبيب نفسك", 
+                    "تغير المسار", 
+                    "أساليب التدريس للدراسات الاجتماعية"
+                ],
+                "الآداب ": ["-- اختر الكتاب --",
+                    " مدخل الى البلاغة العربية", 
+                    "القدس ليست بعيدة ", 
+                    "منهل اللغة الصغير", 
+                    "مصطلحات وأدوات النحو والاعراب", 
+                    "مهارات القراءة (2)", 
+                    "علم اللغة ",
+                    "الزمن النحوي في الغة العربية ",
+                    "المرجع السهل في قواعج النحو العربي ",
+                    "شرح قواعد الاعراب " 
+                ],
+                "اللغة الانجليزية ":["-- اختر الكتاب --",
+                    "Let the Balloon go"
+                    ,"THE LADY OR THE TIGER"
+                    ,"Carbonel",
+                    "A Guide for the Use of Chemical Literature",
+                    "Rules of writing"
+                    ,"CHANGING COURSE"
+                    ,"Danger on Misty Mountain"
+                ],
+                " تاريخ و جغرافيا": ["-- اختر الكتاب --",
+                    "تاريخ مختطف من القدس",
+                    "ذكريات حرب ", 
+                    "موسوعة أعلام فلسطين ",
+                    "المرجع في تاريخ العلوم عند العرب ",
+                    "ملحمة جلجامس ",
+                    "الجغرافيا المناخية ",
+                    "لبنان ودراسة الجغرافية "
+                    ,"الجغرافيا في مئة عام "
+                ],
+                "فلسفة": ["-- اختر الكتاب --",
+                    "التعلم والتعليم", 
+                    "للعبقرية أسرارها"
+                ],
+                "علوم متنوعة":["-- اختر الكتاب --",
+                    "علم الفيزياء" 
+                ],
+                "تحدي القرائة العربي": ["-- اختر الكتاب --",
+                    "علم وضائف الأعضاء", 
+                    "قراءات نصية في الشعر الجاهلي", 
+                    "تلوث التربة", 
+                    "تاريخ مؤرخين العرب", 
+                    "التصحر",  "ابراهيم عليه السلام",
+                    "الكون طريقي الى الله"
+                ]
+            };
+            var books = bookList[category] || [];
+            var bookSelect = document.getElementById('bookSelect');
+            
+            bookSelect.innerHTML = '';
+            books.forEach(function(book) {
+                var option = document.createElement('option');
+                option.value = book;
+                option.text = book;
+                bookSelect.appendChild(option);
+            });
+
+            checkFormCompletion();
+        }
+        
+        function checkFormCompletion() {
+            var fullName = document.getElementById('fullName').value;
+            var classSection = document.getElementById('classSection').value;
+            var age = document.getElementById('age').value;
+            var categorySelect = document.getElementById('categorySelect').value;
+            var bookSelect = document.getElementById('bookSelect').value;
+
+            var isFormComplete = fullName && classSection && age && categorySelect && bookSelect;
+            document.getElementById('submitButton').disabled = !isFormComplete;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var inputs = document.querySelectorAll('#dataForm input, #dataForm select');
+            inputs.forEach(function(input) {
+                input.addEventListener('input', checkFormCompletion);
+            });
+
+            checkFormCompletion();
+        });
+
+        function sendEmail(event) {
+            event.preventDefault();
+
+            var templateParams = {
+                fullName: document.getElementById('fullName').value,
+                classSection: document.getElementById('classSection').value,
+                age: document.getElementById('age').value,
+                bookCategory: document.getElementById('categorySelect').value,
+                selectedBook: document.getElementById('bookSelect').value
+            };
+
+            emailjs.send('service_08ja065', 'template_xkgmly5', templateParams)
+                .then(function(response) {
+                   console.log('تم إرسال البريد الإلكتروني بنجاح!', response.status, response.text);
+                   alert('تم تسجيل طلبك بنجاح !');
+                }, function(error) {
+                   console.log('فشل في إرسال البريد الإلكتروني...', error);
+                   alert(' فشل تسجيل طلبك :') + (JSON.stringify(error));
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>تصنيف الكتب</h2>
+        <form id="dataForm" onsubmit="sendEmail(event)">
+            <label for="categorySelect">اختر التصنيف:</label>
+            <select id="categorySelect" onchange="updateBookList(this.value)" required>
+                <option value="">-- اختر التصنيف --</option>
+                <option value="قصص مصورة">قصص مصورة</option>
+                <option value="ديانات">ديانات</option>
+                <option value="علوم اجتماعية">علوم اجتماعية</option>
+                <option value="الآداب ">الآداب </option>
+                <option value="اللغة الانجليزية ">اللغة الانجليزية </option>
+                <option value=" تاريخ و جغرافيا">تاريخ و جغرافيا </option>
+                <option value="فلسفة">فلسفة</option>
+                <option value="علوم متنوعة">علوم متنوعة</option>
+                <option value="تحدي القرائة العربي">تحدي القرائة العربي</option>
+            </select>
+
+            <label for="bookSelect">اختر الكتاب:</label>
+            <select id="bookSelect" required>
+                <option value="">-- اختر الكتاب --</option>
+            </select>
+
+            <label for="fullName">الاسم الرباعي:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="classSection">الصف والشعبة:</label>
+            <input type="text" id="classSection" name="classSection" required>
+
+            <label for="age">العمر:</label>            
+            <input type="number" id="age" name="age" required>
+            <button type="submit" class="submit-button">إرسال</button>
+        </form>
+    </div> 
+</body>
+</html>
